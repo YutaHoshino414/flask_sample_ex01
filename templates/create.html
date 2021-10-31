@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content container"><br>
+        <h2>新規登録</h2>
+        <form method="POST">
+            <label for="title">タイトル</label>
+            <input type="text" name="title">
+            <label for="content">内容</label>
+            <input type="text" name="content">
+            <label for="due">期日</label>
+            <input type="date" name="due" required>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+{% endblock %}
