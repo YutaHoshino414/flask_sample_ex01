@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content container"><br>
+        <h3>詳細</h3><hr>
+        
+        <h2>{{ todo.title }}</h2>
+        <p>{{ todo.content }}</p>
+        <p>{{ todo.due.date() }}</p>
+    <a href="/" role="button">一覧画面</a>
+    </div>
+{% endblock %}

@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="content container">
-        <h2>値の表示</h2>
-        <p>値１：{{ values.val1 }}</p>
-        <p>値２：{{ values.val2 }}</p>
+    <div class="content container"><br>
+        <h2>ToDo一覧</h2>
+        
         <hr>
-        <h2>for文での表示</h2>
-        {% for key, value in values.items() %}
-        <p>{{ key }}=>{{ value }}</p>
+        {%  for todo in todos %}
+        <h3>タイトル: {{ todo.title }}</h3>
+        <p>期限: {{ todo.due.date() }}</p>
+        <a href="/detail/{{ todo.id }}" role="button">詳細</a>
         {% endfor %}
+        <hr>
         <a href="/create">新規作成画面</a>
     </div>
     

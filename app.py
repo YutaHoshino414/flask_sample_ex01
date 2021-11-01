@@ -16,13 +16,38 @@ class Todo(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now(pytz.timezone('Asia/Tokyo')))
 
 @app.route('/', methods=['GET', 'POST'])
-def hello_world():
+def index():
+
+    if request.method == 'GET':
+        todos = Todo.query.all()
+        return render_template('index.html', todos=todos)
+
+@app.route('/test')
+def test():
     values = {"val1": 100, "val2" :200, "val3" :300, "val4" :400 }
-    return render_template('index.html', values=values)
+    return render_template('test.html', values=values)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    return render_template('create.html')
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        due = request.form.get('due')
+
+        due = datetime.strptime(due, '%Y-%m-%d')
+        todo = Todo(title=title, content=content, due = due)
+        
+        db.session.add(todo)
+        db.session.commit()
+        return redirect('/')
+    else:
+        return render_template('create.html')
+
+@app.route('/detail/<int:id>')
+def read(id):
+    todo = Todo.query.get(id)
+    return render_template('detail.html', todo=todo)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
