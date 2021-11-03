@@ -4,12 +4,12 @@
         <h2>新規登録</h2>
         <form method="POST">
             <label for="title">タイトル</label>
-            <input type="text" name="title">
+            <input type="text" name="title" class="form-control">
             <label for="content">内容</label>
-            <input type="text" name="content">
+            <input type="text" name="content" class="form-control"><br>
             <label for="due">期日</label>
-            <input type="date" name="due" required>
-            <input type="submit" value="Create">
+            <input type="date" name="due" required><br><br>
+            <input type="submit" value="Create" class="btn btn-primary">
         </form>
     </div>
 {% endblock %}

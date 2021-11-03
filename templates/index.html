@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="content container"><br>
-        <h2>ToDo一覧</h2>
-        
+        <h2>トップページ：ToDo一覧</h2>
+        <a href="/create" class="btn btn-info">新規作成画面</a>
         <hr>
         {%  for todo in todos %}
         <h3>タイトル: {{ todo.title }}</h3>
         <p>期限: {{ todo.due.date() }}</p>
-        <a href="/detail/{{ todo.id }}" role="button">詳細</a>
+        <p>作成日: {{ todo.created_at.date() }}</p>
+        <a href="/detail/{{ todo.id }}" role="button" class="btn btn-primary">詳細</a>
+        <a href="/edit/{{ todo.id }}" role="button" class="btn btn-success">編集</a>
+        <a href="/delete/{{ todo.id }}" role="button" class="btn btn-danger">削除</a>
         {% endfor %}
         <hr>
-        <a href="/create">新規作成画面</a>
+        
     </div>
     
 {% endblock %}

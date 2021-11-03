@@ -48,6 +48,26 @@ def read(id):
     todo = Todo.query.get(id)
     return render_template('detail.html', todo=todo)
 
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    todo = Todo.query.get(id)
+    if request.method == 'GET':
+        return render_template('edit.html', todo=todo)
+    else:
+        todo.title = request.form.get('title')
+        todo.detail = request.form.get('detail')
+        todo.due = datetime.strptime(request.form.get('due'), '%Y-%m-%d')
+
+        db.session.commit()
+        return redirect('/')
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    todo = Todo.query.get(id)
+
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
