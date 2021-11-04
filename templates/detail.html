@@ -2,11 +2,21 @@
 
 {% block content %}
     <div class="content container"><br>
-        <h3>詳細</h3><hr>
-        
-        <h2>{{ todo.title }}</h2>
-        <p>{{ todo.content }}</p>
-        <p>{{ todo.due.date() }}</p>
-    <a href="/" role="button">一覧画面</a>
+        <h3>詳細</h3>
+        <table class="table table-bordered w-50">
+            <tr>
+                <th class="table-primary">タイトル</th>
+                <td>{{ todo.title }}</td>
+            </tr>
+            <tr>
+                <th class="table-primary">ToDo内容</th>
+                <td>{{ todo.content }}</td>
+            </tr>
+            <tr>
+                <th class="table-primary">期限</th>
+                <td>{{ todo.due.date() }}</td>
+            </tr>
+        </table>
+        <a href="/" role="button" class="btn btn-info">一覧画面へ</a>
     </div>
 {% endblock %}

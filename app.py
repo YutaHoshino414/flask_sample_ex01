@@ -17,7 +17,6 @@ class Todo(db.Model):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
     if request.method == 'GET':
         todos = Todo.query.all()
         return render_template('index.html', todos=todos)
@@ -35,7 +34,7 @@ def create():
         due = request.form.get('due')
 
         due = datetime.strptime(due, '%Y-%m-%d')
-        todo = Todo(title=title, content=content, due = due)
+        todo = Todo(title=title, content=content, due=due)
         
         db.session.add(todo)
         db.session.commit()
