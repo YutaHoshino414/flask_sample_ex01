@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from flask import Flask
 from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -5,6 +7,7 @@ from datetime import datetime
 import pytz
 import requests
 
+load_dotenv()
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 db = SQLAlchemy(app)
@@ -27,7 +30,22 @@ def test():
     values = {
         "val1": 100, "val2" :200, "val3" :300, "val4" :400 
         }
-    return render_template('test.html', values=values)
+    return render_template('temp/test.html', values=values)
+
+@app.route('/movie')
+def movie():
+    url = f'https://www.omdbapi.com/?s=man&apikey={os.getenv("API_KEY")}'
+    res = requests.get(url).json()
+    datas = res['Search'][2:7]
+    movie_data = []
+    for dict_data in datas:
+        data = {
+            'title' : dict_data['Title'],
+            'poster' : dict_data['Poster'],
+            'year' : dict_data['Year'],
+            }
+        movie_data.append(data)
+    return render_template('temp/movie.html', movie_data=movie_data, datas=datas)
 
 @app.route('/zipcode/<code>')
 def zipcode(code):
@@ -40,7 +58,7 @@ def zipcode(code):
         "area" : res['results'][0]['address3'],
         "prefcode" : res['results'][0]['prefcode'],
         }
-    return render_template('zipcode.html', json_data=json_data, res=res)
+    return render_template('/temp/zipcode.html', json_data=json_data, res=res)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
