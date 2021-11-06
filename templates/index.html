@@ -1,34 +1,32 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <div class="content container"><br>
-        <h2>トップページ</h2><br>
-        <h4>TODO一覧:</h4>
-        <table class="table ">
-            <caption>* List of ToDos</caption>
-            <thead class="thead-light">
-                <tr>
-                    <th>#</th>
-                    <th>タイトル</th>
-                    <th>期限</th>
-                    <th>作成日</th>
-                    <th>アクション</th>
-                </tr>
-            </thead>
-            {% for todo in todos %}
+    <h2>トップページ</h2><br>
+    <h4>TODO一覧:</h4>
+    <table class="table ">
+        <caption>* List of ToDos</caption>
+        <thead class="thead-light">
             <tr>
-                <td>{{ todo.id }}</td>
-                <td>{{ todo.title }}</td>
-                <td>{{ todo.due.date() }}</td>
-                <td>{{ todo.created_at.date() }}</td>
-                <td>
-                    <a href="/detail/{{ todo.id }}" role="button" class="btn btn-primary">詳細</a>
-                    <a href="/edit/{{ todo.id }}" role="button" class="btn btn-success">編集</a>
-                    <a href="/delete/{{ todo.id }}" role="button" class="btn btn-danger">削除</a>
-                </td>             
+                <th>#</th>
+                <th>タイトル</th>
+                <th>期限</th>
+                <th>作成日</th>
+                <th>アクション</th>
             </tr>
-            {% endfor %}
-        </table>
-        <a href="/create" class="btn btn-info">新規作成画面</a>
-    </div>
-    
+        </thead>
+        {% for todo in todos %}
+        <tr>
+            <td>{{ todo.id }}</td>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.due.date() }}</td>
+            <td>{{ todo.created_at.date() }}</td>
+            <td>
+                <a href="/detail/{{ todo.id }}" role="button" class="btn btn-primary">詳細</a>
+                <a href="/edit/{{ todo.id }}" role="button" class="btn btn-success">編集</a>
+                <a href="/delete/{{ todo.id }}" role="button" class="btn btn-danger">削除</a>
+            </td>             
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/create" class="btn btn-info">新規作成画面</a>   
 {% endblock %}

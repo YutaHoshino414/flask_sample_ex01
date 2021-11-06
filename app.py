@@ -3,6 +3,7 @@ from flask import render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pytz
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -23,8 +24,23 @@ def index():
 
 @app.route('/test')
 def test():
-    values = {"val1": 100, "val2" :200, "val3" :300, "val4" :400 }
+    values = {
+        "val1": 100, "val2" :200, "val3" :300, "val4" :400 
+        }
     return render_template('test.html', values=values)
+
+@app.route('/zipcode/<code>')
+def zipcode(code):
+    
+    url = f'http://zipcloud.ibsnet.co.jp/api/search?zipcode={code}'
+    res = requests.get(url).json()
+    json_data = {
+        "pref" : res['results'][0]['address1'],
+        "city" : res['results'][0]['address2'],
+        "area" : res['results'][0]['address3'],
+        "prefcode" : res['results'][0]['prefcode'],
+        }
+    return render_template('zipcode.html', json_data=json_data, res=res)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():

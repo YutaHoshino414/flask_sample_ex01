@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <div class="content container">
         <h2>値の表示</h2>
         <p>値１：{{ values.val1 }}</p>
         <p>値２：{{ values.val2 }}</p>
@@ -9,5 +9,4 @@
         {% for key, value in values.items() %}
         <p>{{ key }}=>{{ value }}</p>
         {% endfor %}
-    </div>
 {% endblock %}

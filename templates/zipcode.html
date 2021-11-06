@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>zipcode</h3>
+<p>都道府県：{{ json_data.pref }}</p>
+<p>市区町村：{{ json_data.city }}</p>
+<p>区域：{{ json_data.area }}</p>
+<p>都道府県コード：{{ json_data.prefcode }}</p>
+<hr>
+<h4>original json</h4>
+<p>{{ res }}</p>
+
+{% endblock %}
