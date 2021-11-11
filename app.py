@@ -36,7 +36,7 @@ def test():
 def movie():
     url = f'https://www.omdbapi.com/?s=man&apikey={os.getenv("API_KEY")}'
     res = requests.get(url).json()
-    datas = res['Search'][2:7]
+    datas = res['Search'][:10]
     movie_data = []
     for dict_data in datas:
         data = {

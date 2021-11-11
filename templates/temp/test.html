@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>値の表示</h2>
-<p>値１：{{ values.val1 }}</p>
-<p>値２：{{ values.val2 }}</p>
-<hr>
-<h4>for文での表示</h4>
-{% for key, value in values.items() %}
-<p>{{ key }}=>{{ value }}</p>
-{% endfor %}
-<hr>
+    <h2>値の表示</h2>
+    <p>値１：{{ values.val1 }}</p>
+    <p>値２：{{ values.val2 }}</p>
+    <hr>
+    <h4>for文での表示</h4>
+    {% for key, value in values.items() %}
+    <p>{{ key }}=>{{ value }}</p>
+    {% endfor %}
+    <hr>
+    <div id="app">
+        <h2> { message } </h2>
+        <P>{ task }</P>
+    </div><br>
+    <div id="task">
+        <input type='text' class='form-control w-50 mb-3' v-model="task">
+        <P>{ task }</P>
+        <div v-for="task in tasks":key='index'>
+            <li>{ task.title }</li>
+        </div>
+    </div><br>
 {% endblock %}
