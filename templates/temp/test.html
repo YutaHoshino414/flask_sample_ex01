@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>値の表示</h2>
+
+    <h3>値の表示</h3>
     <p>値１：{{ values.val1 }}</p>
     <p>値２：{{ values.val2 }}</p>
     <hr>
@@ -17,8 +18,14 @@
     <div id="task">
         <input type='text' class='form-control w-50 mb-3' v-model="task">
         <P>{ task }</P>
-        <div v-for="task in tasks":key='index'>
-            <li>{ task.title }</li>
+        <div class="card w-25 mb-3" v-for="result in results":key='index'>
+          <div class="card-body">
+            <p>都道府県：{ result.address1 }</p>
+            <p>市区町村：{ result.address2 }</p>
+            <p>区域：{ result.address3 }</p>
+            <p>都道府県コード：{ result.prefcode }</p>
+          </div>
         </div>
     </div><br>
+
 {% endblock %}

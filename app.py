@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pytz
@@ -19,6 +19,7 @@ class Todo(db.Model):
     due = db.Column(db.DateTime, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now(pytz.timezone('Asia/Tokyo')))
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
@@ -30,13 +31,13 @@ def test():
     values = {
         "val1": 100, "val2" :200, "val3" :300, "val4" :400 
         }
-    return render_template('temp/test.html', values=values)
+    return render_template('temp/test.html', values=values)  #jsonify(values) 
 
 @app.route('/movie')
 def movie():
     url = f'https://www.omdbapi.com/?s=man&apikey={os.getenv("API_KEY")}'
     res = requests.get(url).json()
-    datas = res['Search'][:10]
+    datas = res['Search'][:15]
     movie_data = []
     for dict_data in datas:
         data = {

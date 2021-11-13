@@ -16,5 +16,7 @@
         </div>
     {% endfor %}
     </div><br>
-    <p><strong>orginal json data:</strong> <br> {{ datas }}</p>
+    <div>
+    <p><strong>orginal json data:</strong> <br> {{ datas|tojson }}</p>
+    </div>
 {% endblock %}

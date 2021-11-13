@@ -11,16 +11,15 @@ const Task = {
     data() {
         return {
             task: 'New Task',
-
-            tasks: [
-                {title:'one'},
-                {title:'two'},
-                {title:'three'},
-            ]
+            results: []
         }
     },
-    delimiters: ['{', '}']
-}
+    delimiters: ['{', '}'],
+    mounted() {
+    axios.get("http://zipcloud.ibsnet.co.jp/api/search?zipcode=1910032")
+    .then(response => {this.results = response.data.results})
+    }
+};
 
 Vue.createApp(Hello).mount('#app')
 Vue.createApp(Task).mount('#task')
