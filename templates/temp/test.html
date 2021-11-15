@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <h3>値の表示</h3>
+    <h3>値の表示 from flask</h3>
     <p>値１：{{ values.val1 }}</p>
     <p>値２：{{ values.val2 }}</p>
     <hr>
@@ -13,7 +12,11 @@
     <hr>
     <div id="app">
         <h2> { message } </h2>
-        <P>{ task }</P>
+        <div class="card  mb-3" v-for="result, index in results":key='index'>
+        { result }
+        <img src="{result.Poster}">
+        </div>
+        
     </div><br>
     <div id="task">
         <input type='text' class='form-control w-50 mb-3' v-model="task">
@@ -26,6 +29,7 @@
             <p>都道府県コード：{ result.prefcode }</p>
           </div>
         </div>
+        { results }
     </div><br>
 
 {% endblock %}

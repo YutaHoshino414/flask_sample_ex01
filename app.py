@@ -47,6 +47,7 @@ def movie():
             }
         movie_data.append(data)
     return render_template('temp/movie.html', movie_data=movie_data, datas=datas)
+        
 
 @app.route('/zipcode/<code>')
 def zipcode(code):
