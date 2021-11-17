@@ -8,7 +8,7 @@ const Hello = {
     },
     delimiters: ['{', '}'],
     created(){
-        fetch("https://www.omdbapi.com/?s=man&apikey=4a3b711b")
+        fetch("https://www.omdbapi.com/?s=man&apikey=")
         .then(response =>  response.json())
         .then( data =>{ 
             console.log(data["Search"]);
